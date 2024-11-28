@@ -34,8 +34,9 @@ public class FareCalculatorApplication {
 	public CommandLineRunner run() {
 		return args -> {
 			fareService.loadFareData();
-			Map<String, List<Trip>> tripData = csvUtil.readCsvData("taps.csv");
+			Map<String, List<Trip>> tripData = csvUtil.readTripsData("taps.csv");
 			List<BusTripSummary> busTripSummaryList = tripSummaryService.generateTripSummary(tripData);
+			csvUtil.writeTripSummary(busTripSummaryList);
 		};
 	}
 }

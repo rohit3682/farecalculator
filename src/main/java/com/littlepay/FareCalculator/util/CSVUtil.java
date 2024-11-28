@@ -1,12 +1,13 @@
 package com.littlepay.FareCalculator.util;
 
+import com.littlepay.FareCalculator.dto.BusTripSummary;
 import com.littlepay.FareCalculator.dto.Trip;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -17,7 +18,10 @@ import java.util.Map;
 @Service
 public class CSVUtil {
 
-    public Map<String, List<Trip>> readCsvData(String fileName) throws IOException {
+    @Value("${trips.csv.path}")
+    private String tripsCsvPath;
+
+    public Map<String, List<Trip>> readTripsData(String fileName) throws IOException {
         Map<String, List<Trip>> csvData = new HashMap<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         int i = 1;
@@ -50,6 +54,57 @@ public class CSVUtil {
             }
 
             return csvData;
+        }
+    }
+
+    public void writeTripSummary(List<BusTripSummary> busTripSummaryList) throws IOException{
+        String fileName = "trips.csv";
+        String[] headers = {"Started", "Finished", "DurationSecs", "FromStopId", "ToStopId", "ChargeAmount", "CompanyId", "BusID", "PAN", "Status"};
+
+        String resourcePath = Paths.get(tripsCsvPath, fileName).toString();
+
+        writeCsv(resourcePath, headers, busTripSummaryList);
+        System.out.println("Done");
+    }
+
+    private void writeCsv(String filePath, String[] headers, List<BusTripSummary> busTripSummaryList) throws IOException {
+        File file = new File(filePath);
+
+        try(BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(file)))) {
+            bufferedWriter.write(String.join(Constants.COMA_DELIMITER, headers));
+            bufferedWriter.newLine();
+
+            for(BusTripSummary busTripSummary : busTripSummaryList) {
+                bufferedWriter.write(busTripSummary.getStarted()+"");
+                bufferedWriter.write(Constants.COMA_DELIMITER);
+
+                bufferedWriter.write(busTripSummary.getFinished()+"");
+                bufferedWriter.write(Constants.COMA_DELIMITER);
+
+                bufferedWriter.write(busTripSummary.getDurationSeconds()+"");
+                bufferedWriter.write(Constants.COMA_DELIMITER);
+
+                bufferedWriter.write(busTripSummary.getFromStopId());
+                bufferedWriter.write(Constants.COMA_DELIMITER);
+
+                bufferedWriter.write(busTripSummary.getToStopId()==null?"":busTripSummary.getToStopId());
+                bufferedWriter.write(Constants.COMA_DELIMITER);
+
+                bufferedWriter.write(busTripSummary.getChargeAmt()+"");
+                bufferedWriter.write(Constants.COMA_DELIMITER);
+
+                bufferedWriter.write(busTripSummary.getCompanyId());
+                bufferedWriter.write(Constants.COMA_DELIMITER);
+
+                bufferedWriter.write(busTripSummary.getBusId());
+                bufferedWriter.write(Constants.COMA_DELIMITER);
+
+                bufferedWriter.write(busTripSummary.getPan());
+                bufferedWriter.write(Constants.COMA_DELIMITER);
+
+                bufferedWriter.write(busTripSummary.getStatus());
+                bufferedWriter.newLine();
+            }
         }
     }
 }
