@@ -1,17 +1,31 @@
 package com.littlepay.FareCalculator.dto;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvDate;
+
+import java.time.LocalDateTime;
 
 public class Trip  {
 
-    @CsvBindByName
-    private Integer tripId;
+    @CsvBindByName(column = "ID")
+    private Integer id;
 
-    public Integer getTripId() {
-        return tripId;
-    }
+    @CsvDate(value = " dd-MM-yyyy HH:mm:ss")
+    @CsvBindByName(column = "DateTimeUTC")
+    private LocalDateTime dateTimeUtc;
 
-    public void setTripId(Integer tripId) {
-        this.tripId = tripId;
-    }
+    @CsvBindByName(column = "TapType")
+    private String tapType;
+
+    @CsvBindByName(column = "StopId")
+    private String stopId;
+
+    @CsvBindByName(column = "CompanyId")
+    private String companyId;
+
+    @CsvBindByName(column = "BusID")
+    private String busId;
+
+    @CsvBindByName(column = "PAN")
+    private String pan;
 }
