@@ -41,7 +41,7 @@ The output file trips.csv for the sample input in the problem statement is check
 ### Further Enhancements
 * The maximum gap between TAP ON & TAP OFF is 4 hours, post that, the TAP ON & TAP OFF should be considered two individual trips.
 * Refactor the code to detangle FareService & TripSummaryService.
-* Write JUnit test cases for CSVUtil write method.
+* Improve the test coverage.
 
 ### Reference Documentation
 For further reference, please consider the following sections:
