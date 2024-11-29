@@ -22,7 +22,7 @@ The application reads the fares from a flat file called "fares" under the resour
 | Stop 2 | 3.25   | 0      | 5.5    |
 | Stop 3 | 7.3    | 5.5    | 0      |
 
-This structure gives flexibility to add more stops and route fare between them without any code change. Sample fare data for 10 stops is added to `src/main/test/resources/fares` file. This data is used by the test cases.
+This structure gives flexibility to add more stops and route fare between them without any code change. Sample fare data for 10 stops is added to `src/test/resources/fares` file. This data is used by the test cases.
 
 ### Output Files
 The application produces summary of trips in a file called trips.csv which is created at `/tmp` location by default. The location can be changed by 
