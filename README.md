@@ -1,5 +1,13 @@
 # Getting Started
 
+### Running the application
+* Clone the source code either via SSH or HTTPS
+* Goto the folder farecalculator
+* Clean the code build with `./gradlew clean`
+* Build the code build with `./gradlew build`
+* Run the test cases with `./gradlew test`
+* Run the application `./gradlew bootRun`
+
 ### Route Fares
 The application reads the fares from a flat file "fares" unders resources folder. The content of the file is in the form of a matrix. 
 
