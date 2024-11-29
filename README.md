@@ -29,13 +29,14 @@ The application produces summary of trips in a file called trips.csv which is cr
 * Exporting an environment variable `TRIPS_CSV_PATH=/Users/littlepayuser` or 
 * Updating the `trips.csv.path` property in the application.properties file. 
 
-The user executing the application need write permission to the mentioned location. The output file trips.csv for the sample input in the problem statement is checked in at `src/main/resources`.
+The user executing the application needs write permission to the mentioned location. **The output file is not ordered with respect to the date & time of the trips. It is ordered by PAN number in the order as it appears in the tap data**. 
+
+The output file trips.csv for the sample input in the problem statement is checked in at `src/main/resources`.
 
 ### Assumptions
 * The input files - taps.csv & fares are always wellformed & have valid data.
 * The customer will always use the same credit card to TAP ON and TAP OFF
 * If the customer forgets to TAP ON and only TAPS OFF, it is considered as an incomplete trip and will incur maximum charges possible from the stop where TAP OFF occurred.
-* The output file - trips.csv is not ordered with respect to the date & time of the trips. It is ordered by PAN number.
 
 ### Further Enhancements
 * The maximum gap between TAP ON & TAP OFF is 4 hours, post that, the TAP ON & TAP OFF should be considered two individual trips.
