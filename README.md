@@ -4,7 +4,7 @@
 * Clone the source code either via SSH or HTTPS
 * Goto the folder farecalculator
 * Clean the code build with `./gradlew clean`
-* Build the code build with `./gradlew build`
+* Build the code with `./gradlew build`
 * Run the test cases with `./gradlew test`. Test results are available at `build/reports/tests/test/index.html`
 * Run the application `./gradlew bootRun`
 
