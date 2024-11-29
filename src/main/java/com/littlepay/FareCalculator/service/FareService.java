@@ -44,6 +44,10 @@ public class FareService {
         }
     }
 
+    public int getFareCount(){
+        return faresData.size();
+    }
+
     public double getMaxFare(Integer stopId) {
         return maxFareData.get(stopId);
     }

@@ -16,7 +16,11 @@ import java.util.Map;
 public class TripSummaryService {
 
     @Autowired
-    private FareService fareService;
+    private final FareService fareService;
+
+    public TripSummaryService(FareService fareService) {
+        this.fareService = fareService;
+    }
 
     public List<BusTripSummary> generateTripSummary(Map<String, List<Trip>> tripData) {
         List<BusTripSummary> tripSummaryList = new ArrayList<>();
@@ -60,14 +64,28 @@ public class TripSummaryService {
                     } else {
                         // We are seeing a TAP OFF without a TAP ON
                         // mark this as an incomplete trip
+                        // clear the previous trip data
+                        busTripSummary = new BusTripSummary();
                         busTripSummary.setFinished(trip.getDateTimeUtc());
                         busTripSummary.setDurationSeconds(0);
                         busTripSummary.setToStopId(trip.getStopId());
                         busTripSummary.setChargeAmt(calculateTripCost(null, trip.getStopId()));
                         busTripSummary.setStatus(Constants.TRIP_INCOMPLETE);
+                        busTripSummary.setBusId(trip.getBusId());
+                        busTripSummary.setCompanyId(trip.getCompanyId());
+                        busTripSummary.setPan(trip.getPan());
                         tripSummaryList.add(busTripSummary);
                     }
                 }
+            }
+            // If the tapOn is still true, it means the last trip was incomplete
+            if(tapOn) {
+                busTripSummary.setFinished(null);
+                busTripSummary.setDurationSeconds(0);
+                busTripSummary.setToStopId(null);
+                busTripSummary.setChargeAmt(calculateTripCost(busTripSummary.getFromStopId(), null));
+                busTripSummary.setStatus(Constants.TRIP_INCOMPLETE);
+                tripSummaryList.add(busTripSummary);
             }
         }
         );
@@ -76,12 +94,8 @@ public class TripSummaryService {
     }
 
     private long getTimeDiffInSeconds(LocalDateTime date1, LocalDateTime date2) {
-        long seconds = 0;
-
         Duration duration = Duration.between(date1, date2);
-        seconds = duration.getSeconds();
-
-        return seconds;
+        return duration.getSeconds();
     }
 
     private BusTripSummary createBusTripSummary(Trip trip) {
@@ -107,11 +121,7 @@ public class TripSummaryService {
     }
 
     private int retrieveStopNumber(String stopId) {
-        int stopNumber = 0;
-
-        stopNumber = Integer.parseInt(stopId.substring(stopId.indexOf('p')+1));
-
-        return stopNumber;
+        return Integer.parseInt(stopId.substring(stopId.indexOf('p')+1));
     }
 
 
