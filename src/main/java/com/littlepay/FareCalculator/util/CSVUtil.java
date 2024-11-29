@@ -21,7 +21,7 @@ public class CSVUtil {
     @Value("${trips.csv.path}")
     private String tripsCsvPath;
 
-    public Map<String, List<Trip>> readTripsData(String fileName) throws IOException {
+    public Map<String, List<Trip>> readTapsData(String fileName) throws IOException {
         Map<String, List<Trip>> csvData = new HashMap<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         int i = 1;
@@ -75,16 +75,18 @@ public class CSVUtil {
             bufferedWriter.newLine();
 
             for(BusTripSummary busTripSummary : busTripSummaryList) {
-                bufferedWriter.write(busTripSummary.getStarted()+"");
+                bufferedWriter.write(busTripSummary.getStarted()==null?"":
+                        busTripSummary.getStarted()+"");
                 bufferedWriter.write(Constants.COMA_DELIMITER);
 
-                bufferedWriter.write(busTripSummary.getFinished()+"");
+                bufferedWriter.write(busTripSummary.getFinished()==null? "" :
+                        busTripSummary.getFinished()+"");
                 bufferedWriter.write(Constants.COMA_DELIMITER);
 
                 bufferedWriter.write(busTripSummary.getDurationSeconds()+"");
                 bufferedWriter.write(Constants.COMA_DELIMITER);
 
-                bufferedWriter.write(busTripSummary.getFromStopId());
+                bufferedWriter.write(busTripSummary.getFromStopId()==null?"":busTripSummary.getFromStopId());
                 bufferedWriter.write(Constants.COMA_DELIMITER);
 
                 bufferedWriter.write(busTripSummary.getToStopId()==null?"":busTripSummary.getToStopId());

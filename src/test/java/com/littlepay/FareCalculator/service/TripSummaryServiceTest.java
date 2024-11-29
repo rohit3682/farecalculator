@@ -22,7 +22,7 @@ public class TripSummaryServiceTest {
         TripSummaryService tripSummaryService = new TripSummaryService(fareService);
         CSVUtil csvUtil = new CSVUtil();
         fareService.loadFareData();
-        Map<String, List<Trip>> tripData = csvUtil.readTripsData("taps.csv");
+        Map<String, List<Trip>> tripData = csvUtil.readTapsData("taps.csv");
         busTripSummaryList = tripSummaryService.generateTripSummary(tripData);
     }
 
@@ -161,9 +161,10 @@ public class TripSummaryServiceTest {
                 .toList();
 
         Assertions.assertEquals(1, tempList.size());
+    }
 
-
-
+    @Test
+    public void testFromStopToStop() {
 
     }
 
