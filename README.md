@@ -5,12 +5,12 @@
 * Goto the folder farecalculator
 * Clean the code build with `./gradlew clean`
 * Build the code build with `./gradlew build`
-* Run the test cases with `./gradlew test`
+* Run the test cases with `./gradlew test`. If any of the test fail, detail report is available at `build/reports/tests/test/index.html`
 * Run the application `./gradlew bootRun`
 
 ### Input Files
-The application takes 2 files as inputs
-* taps.csv - list of taps details
+The application takes 2 files as inputs from the location - `src/main/resources`
+* taps.csv - list of taps details. 
 * fares - a matrix of fare data for every stop to every other stop. See below for more details.
 
 ### Route Fares

@@ -58,4 +58,113 @@ public class TripSummaryServiceTest {
         Assertions.assertEquals(3, incompleteTrips.size());
     }
 
+    @Test
+    public void testIncompleteTrips() {
+        List<BusTripSummary> incompleteTrips = busTripSummaryList.stream()
+                .filter(trip -> Constants.TRIP_INCOMPLETE.equalsIgnoreCase(trip.getStatus()))
+                .toList();
+
+        List<BusTripSummary> tempList = incompleteTrips.stream()
+                .filter(trip -> "1400001555555558".equalsIgnoreCase(trip.getPan()))
+                .toList();
+
+        Assertions.assertEquals(1, tempList.size());
+
+        tempList = incompleteTrips.stream()
+                .filter(trip -> "4111111111111111".equalsIgnoreCase(trip.getPan()))
+                .toList();
+
+        Assertions.assertEquals(1, tempList.size());
+
+        tempList = incompleteTrips.stream()
+                .filter(trip -> "7000007777777771".equalsIgnoreCase(trip.getPan()))
+                .toList();
+
+        Assertions.assertEquals(1, tempList.size());
+    }
+
+    @Test
+    public void testCancelledTrips() {
+        List<BusTripSummary> cancelledTrips = busTripSummaryList.stream()
+                .filter(trip -> Constants.TRIP_CANCELLED.equalsIgnoreCase(trip.getStatus()))
+                .toList();
+
+        List<BusTripSummary> tempList = cancelledTrips.stream()
+                .filter(trip -> "4111111111111111".equalsIgnoreCase(trip.getPan()))
+                .toList();
+
+        Assertions.assertEquals(1, tempList.size());
+
+        tempList = cancelledTrips.stream()
+                .filter(trip -> "6000006666666660".equalsIgnoreCase(trip.getPan()))
+                .toList();
+
+        Assertions.assertEquals(1, tempList.size());
+    }
+
+    @Test
+    public void testCompleteTrips() {
+        List<BusTripSummary> completedTrips = busTripSummaryList.stream()
+                .filter(trip -> Constants.TRIP_COMPLETE.equalsIgnoreCase(trip.getStatus()))
+                .toList();
+
+        List<BusTripSummary> tempList = completedTrips.stream()
+                .filter(trip -> "5500005555555559".equalsIgnoreCase(trip.getPan()))
+                .toList();
+
+        Assertions.assertEquals(2, tempList.size());
+
+        tempList = completedTrips.stream()
+                .filter(trip -> "6000006666666660".equalsIgnoreCase(trip.getPan()))
+                .toList();
+
+        Assertions.assertEquals(1, tempList.size());
+
+        tempList = completedTrips.stream()
+                .filter(trip -> "1200001333333336".equalsIgnoreCase(trip.getPan()))
+                .toList();
+
+        Assertions.assertEquals(1, tempList.size());
+
+        tempList = completedTrips.stream()
+                .filter(trip -> "1400001555555558".equalsIgnoreCase(trip.getPan()))
+                .toList();
+
+        Assertions.assertEquals(1, tempList.size());
+
+        tempList = completedTrips.stream()
+                .filter(trip -> "1000001111111114".equalsIgnoreCase(trip.getPan()))
+                .toList();
+
+        Assertions.assertEquals(1, tempList.size());
+
+        tempList = completedTrips.stream()
+                .filter(trip -> "8000008888888882".equalsIgnoreCase(trip.getPan()))
+                .toList();
+
+        Assertions.assertEquals(1, tempList.size());
+
+        tempList = completedTrips.stream()
+                .filter(trip -> "9000009999999993".equalsIgnoreCase(trip.getPan()))
+                .toList();
+
+        Assertions.assertEquals(1, tempList.size());
+
+        tempList = completedTrips.stream()
+                .filter(trip -> "1100001222222225".equalsIgnoreCase(trip.getPan()))
+                .toList();
+
+        Assertions.assertEquals(1, tempList.size());
+
+        tempList = completedTrips.stream()
+                .filter(trip -> "1300001444444447".equalsIgnoreCase(trip.getPan()))
+                .toList();
+
+        Assertions.assertEquals(1, tempList.size());
+
+
+
+
+    }
+
 }
