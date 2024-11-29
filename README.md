@@ -29,7 +29,7 @@ The application produces summary of trips in a file called trips.csv which is cr
 * Exporting an environment variable `TRIPS_CSV_PATH=/Users/littlepayuser` or 
 * Updating the `trips.csv.path` property in the application.properties file. 
 
-The user executing the application need write permission to the mentioned location.
+The user executing the application need write permission to the mentioned location. The output file trips.csv for the sample input in the problem statement is checked in at `src/main/resources`.
 
 ### Assumptions
 * The input files - taps.csv & fares are always wellformed & have valid data.
