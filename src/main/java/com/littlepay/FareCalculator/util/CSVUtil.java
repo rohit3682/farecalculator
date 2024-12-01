@@ -55,7 +55,7 @@ public class CSVUtil {
                 csvData.get(pan).add(trip);
             }
 
-            System.out.println("Total taps: "+(i-1));
+            System.out.println("Total taps: "+(Math.max(i - 2, 0)));
             System.out.println("Total unique PANs: "+csvData.size());
 
             return csvData;
