@@ -24,6 +24,7 @@ public class TripSummaryService {
 
     public List<BusTripSummary> generateTripSummary(Map<String, List<Trip>> tripData) {
         List<BusTripSummary> tripSummaryList = new ArrayList<>();
+        System.out.println("Generating trip summary....");
 
         tripData.forEach((k, v)-> {
             boolean tapOn = false;

@@ -28,6 +28,7 @@ public class CSVUtil {
 
         try (BufferedReader bufferedReader = new BufferedReader(
                 new InputStreamReader(new ClassPathResource(fileName).getInputStream()))) {
+            System.out.println("Reading taps data from "+fileName);
             String line;
             while ((line = bufferedReader.readLine()) != null) {
 
@@ -36,6 +37,7 @@ public class CSVUtil {
                     i++;
                     continue;
                 }
+                i++;
 
                 String[] values = line.split(Constants.COMA_DELIMITER);
                 String pan = values[Constants.FEILD_PAN].trim();
@@ -53,6 +55,9 @@ public class CSVUtil {
                 csvData.get(pan).add(trip);
             }
 
+            System.out.println("Total taps: "+(i-1));
+            System.out.println("Total unique PANs: "+csvData.size());
+
             return csvData;
         }
     }
@@ -64,7 +69,7 @@ public class CSVUtil {
         String resourcePath = Paths.get(tripsCsvPath, fileName).toString();
 
         writeCsv(resourcePath, headers, busTripSummaryList);
-        System.out.println("Done");
+        System.out.println("Trip summary written to "+resourcePath);
     }
 
     private void writeCsv(String filePath, String[] headers, List<BusTripSummary> busTripSummaryList) throws IOException {

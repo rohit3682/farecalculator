@@ -17,6 +17,7 @@ public class FareService {
     private final Map<Integer, Double> maxFareData = new HashMap<>();
 
     public void loadFareData() throws IOException {
+        System.out.println("Loading fare data...");
         try (BufferedReader bufferedReader = new BufferedReader(
                 new InputStreamReader(new ClassPathResource("fares").getInputStream()))) {
             String line;
@@ -42,6 +43,7 @@ public class FareService {
                 fromStopId++;
             }
         }
+        System.out.println("Total number of stops: "+faresData.size());
     }
 
     public int getFareCount(){
